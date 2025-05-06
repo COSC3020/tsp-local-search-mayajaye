@@ -50,3 +50,49 @@ Test your new function; I've provided some basic testing code in `code.test.js`.
 What is the worst-case asymptotic time complexity of your implementation? What
 is the worst-case asymptotic memory complexity? Add your answer, including your
 reasoning, to this markdown file.
+
+The steps of this algorithm are:
+1. Create the list of cities. $\Theta(|V|)$
+2. Get the random start route. $\Theta(|V|)$
+3. Get the route's distance. $\Theta(|V|)$
+4. Call the local search function until no more two opt swaps can be made.  $\Theta(|V|)$ on the worst case if there are |V| possible swaps
+    1. For loop over 0 to n - 2. $\Theta(|V|)$
+        1. For loop over i + 2 to n - 1. $\Theta(|V|)$
+
+           1. Do the twoOptSwap. On the worst case, this is $\Theta(|V|)$ because i and k will be on opposite sides of the array
+           2. Get the new route's distance. $\Theta(|V|)$
+           3. If the new distance is better than the previous, make the new route the next iteration's route and the new distance the 'current incumbent'. $\Theta(|V|)$
+
+
+The runtime equation is:
+
+$T(n) = 4|V| \cdot (|V|^{2} \cdot 3|V|)$
+
+Ignore the constant factors
+
+$= |V| \cdot |V|^{3}$
+
+$= |V|^{4}$
+
+Therefore,
+
+$T(n) \in \Theta(|V|^{4})$
+
+The memory complexity consists of 
+1. The number of cities in the route $(|V|)$
+2. The copy of that array in 2optswaps $(|V|)$
+
+
+So, the memory complexity is $\Theta(|V|)$
+
+#### Sources
+
+I looked at [this](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array) for the "Fisher-Yates" shuffle function
+
+[This](https://www.youtube.com/watch?v=8vbKIfpDPJI&t=76s) guy on youtube explained the 2opt swap with an example
+
+"I certify that I have listed all sources used to complete this exercise,
+including the use of any Large Language Models. All of the work is my own, except
+where stated otherwise. I am aware that plagiarism carries severe penalties and
+that if plagiarism is suspected, charges may be filed against me without prior
+notice."
