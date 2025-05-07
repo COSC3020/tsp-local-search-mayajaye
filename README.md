@@ -55,28 +55,27 @@ The steps of this algorithm are:
 1. Create the list of cities. $\Theta(|V|)$
 2. Get the random start route. $\Theta(|V|)$
 3. Get the route's distance. $\Theta(|V|)$
-4. Call the local search function until no more two opt swaps can be made.  $\Theta(|V|)$ on the worst case if there are |V| possible swaps
+4. While there are improvements to be made; $\Theta(|V|^2)$ because there are $\Theta(|V|^2)$ possible 2opt swaps. There are $|V|^{2}$ pairs of i and k that will swap at least 2 cities. Each swap improves the distance, and the do-while loop stops running when the distance can no longer be improved, so at most the loop will run $\Theta(|V|^2)$ times.
     1. For loop over 0 to n - 2. $\Theta(|V|)$
         1. For loop over i + 2 to n - 1. $\Theta(|V|)$
-
-           1. Do the twoOptSwap. On the worst case, this is $\Theta(|V|)$ because i and k will be on opposite sides of the array
-           2. Get the new route's distance. $\Theta(|V|)$
-           3. If the new distance is better than the previous, make the new route the next iteration's route and the new distance the 'current incumbent'. $\Theta(|V|)$
+              1. Do the twoOptSwap. On the worst case, this is $\Theta(|V|)$ because i and k will be on opposite sides of the array
+              2. Get the new route's distance. $\Theta(|V|)$
+              3. If the new distance is better than the previous, make the new route the next iteration's route and the new distance the 'current incumbent'. $\Theta(|V|)$
 
 
 The runtime equation is:
 
-$T(n) = 4|V| \cdot (|V|^{2} \cdot 3|V|)$
+$T(n) = 3|V| + |V|^{2} \cdot (|V|^{2} \cdot 3|V|)$
 
 Ignore the constant factors
 
-$= |V| \cdot |V|^{3}$
+$= |V| + |V|^{2} \cdot |V|^{3}$
 
-$= |V|^{4}$
+$= |V| + |V|^{5}$
 
-Therefore,
+Ignoring the asymptotically insignificant term,
 
-$T(n) \in \Theta(|V|^{4})$
+$T(n) \in \Theta(|V|^{5})$
 
 The memory complexity consists of 
 1. The number of cities in the route $(|V|)$
