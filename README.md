@@ -55,7 +55,7 @@ The steps of this algorithm are:
 1. Create the list of cities. $\Theta(|V|)$
 2. Get the random start route. $\Theta(|V|)$
 3. Get the route's distance. $\Theta(|V|)$
-4. While there are improvements to be made; $\Theta(|V|^2)$ because there are $\Theta(|V|^2)$ possible 2opt swaps. There are $|V|^{2}$ pairs of i and k that will swap at least 2 cities. Each swap improves the distance, and the do-while loop stops running when the distance can no longer be improved, so at most the loop will run $\Theta(|V|^2)$ times.
+4. While there are improvements to be made; $\Theta(|V|!)$ because there are |V|! possible permutations. On the worst case, ls might only find a small improvement each iteration, so it might have to try all |V|! permutations to find the local minimum.
     1. For loop over 0 to n - 2. $\Theta(|V|)$
         1. For loop over i + 2 to n - 1. $\Theta(|V|)$
               1. Do the twoOptSwap. On the worst case, this is $\Theta(|V|)$ because i and k will be on opposite sides of the array
@@ -65,17 +65,15 @@ The steps of this algorithm are:
 
 The runtime equation is:
 
-$T(n) = 3|V| + |V|^{2} \cdot (|V|^{2} \cdot 3|V|)$
+$T(n) = 3|V| + |V|! \cdot (|V|^{2} \cdot 3|V|)$
 
 Ignore the constant factors
 
-$= |V| + |V|^{2} \cdot |V|^{3}$
-
-$= |V| + |V|^{5}$
+$= |V| + |V|! \cdot |V|^{3}$
 
 Ignoring the asymptotically insignificant term,
 
-$T(n) \in \Theta(|V|^{5})$
+$T(n) \in \Theta(|V|! \cdot |V|^{3})$
 
 The memory complexity consists of 
 1. The number of cities in the route $(|V|)$
